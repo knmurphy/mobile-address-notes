@@ -4,18 +4,26 @@
     <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>A Handlebars example about cats I've met</h1>
-    <marquee><p>As you can tell, you can make a very pretty web page with this stuff.</p></marquee>
 
     <div id="content"></div>
 
-    <script id="cat-template" type="text/x-handlebars-template">
+    <script id="territory-card" type="text/x-handlebars-template">
       <div class="entry">
-        <h2>{{name}}!</h2>
-        <h3>age {{age}}</h3>
+        <h2>{{GivenName}}, {{Surname}}</h2>
         <div class="body">
-          {{{description}}}
+          {{Address}}
         </div>
+          <div class="info">
+              <ul>
+                  <li>Type:{{Type}}</li>
+                  <li>1st:{{1st}}</li>
+                  <li>2nd:{{2nd}}</li>
+                  <li>Holder: {{holder}}</li>
+              </ul>
+              <h4>Comments</h4>
+              <p>{{Comments}}</p>
+          </div>
+          <hr>
       </div>
     </script>
 
@@ -33,10 +41,10 @@
       });
 
       function showInfo(data, tabletop) {
-        var source   = $("#cat-template").html();
+        var source   = $("#territory-card").html();
         var template = Handlebars.compile(source);
 
-        $.each( tabletop.sheets("Cats").all(), function(i, cat) {
+        $.each( tabletop.sheets("SEA125-D6.csv").all(), function(i, cat) {
           var html = template(cat);
           $("#content").append(html);
         });
